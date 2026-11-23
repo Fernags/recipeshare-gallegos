@@ -16,3 +16,9 @@ article h1 { margin-top: 20px }
 .hero { border-radius: 12px }
 li { margin-bottom: 8px }
 a { color: #36523b }
+.filters,.entry,article form { display:flex; gap:14px; align-items:end; flex-wrap:wrap; margin:20px 0 30px }
+.entry { display:grid; align-items:stretch }
+label { display:grid; gap:4px; font: 15px system-ui,sans-serif }
+input,textarea,select,button { padding:10px 14px; border:1px solid #aab2a6; border-radius:6px; font:inherit }
+textarea { min-height:96px }
+button { background:#294c36; color:white; cursor:pointer }
