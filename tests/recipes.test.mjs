@@ -15,3 +15,17 @@ test('each card ID resolves to its complete recipe', () => {
   }
   assert.equal(findRecipe('missing'), undefined);
 });
+import { filterRecipes, parseRecipe } from '../lib/forms.mjs';
+test('cuisine and category must both match', () => {
+  const recipe = { cuisine: 'Iranian', category: 'Main Dish' };
+  const all = [recipe, { ...recipe, category: 'Soup' }];
+  assert.deepEqual(filterRecipes(all, 'Iranian', 'Main Dish'), [recipe]);
+  assert.deepEqual(filterRecipes(all, '', ''), all);
+  assert.deepEqual(filterRecipes(all, 'Japanese', ''), []);
+});
+test('required field errors identify the missing field', () => {
+  assert.throws(() => parseRecipe(new Map([['author','Fern']])), /title/);
+});
+test('ratings show the current average and vote count', () => {
+  assert.equal(ratingLabel([1,5]), '3.0 / 5 (2)');
+});
