@@ -1,13 +1,20 @@
 'use server';
+import { preparePhoto } from '../lib/photos.mjs';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { parseRecipe } from '../lib/forms.mjs';
 import { saveRecipe, addRating } from '../lib/store.mjs';
 export async function create(previous, form) {
   let data;
-  try { data = parseRecipe(form); } catch (error) { return error.message; }
+  const id = crypto.randomUUID();
+  let photo;
+  try {
+    const file = form.get('photo');
+    data = parseRecipe(form, file?.size ? '/photos/' + id : '');
+    if (file?.size) photo = await preparePhoto(file);
+  } catch (error) { return error.message; }
   if (!process.env.DATABASE_URL) return 'The recipe database is not connected yet.';
-  await saveRecipe({ ...data, id: crypto.randomUUID(), ratings: [] });
+  await saveRecipe({ ...data, id, ratings: [] }, photo);
   revalidatePath('/');
   redirect('/');
 }
