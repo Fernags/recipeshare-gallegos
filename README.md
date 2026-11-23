@@ -18,5 +18,7 @@ Import this repository on Vercel Hobby, set DATABASE_URL in the project environm
 | M5 ratings | Done. A submitted rating updates the average and count on the detail page and home card. |
 | M6 persistence | Recipes and ratings are saved in Neon PostgreSQL. |
 | M7 seed recipes | Done. Italian pizza and American pancakes have different cuisines and categories. |
-| S1 Google sign-in, S2 author editing, S3 signed-in ratings, S4 image upload, S5 keyword search, S6 sorting | Not done |
+| S1 Google sign-in, S2 author editing, S3 signed-in ratings, S4 image upload | Not done |
+| S5 keyword search | Implemented. Matches title or ingredient alongside cuisine and category. |
+| S6 sorting | Implemented. Newest first by default, or highest average rating with newer recipes first on ties. |
 | Could: phone-friendly layout | Partly done. Responsive CSS added, awaiting device checks. |

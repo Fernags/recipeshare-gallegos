@@ -29,3 +29,18 @@ test('required field errors identify the missing field', () => {
 test('ratings show the current average and vote count', () => {
   assert.equal(ratingLabel([1,5]), '3.0 / 5 (2)');
 });
+test('keyword matches title or ingredient while respecting both dropdowns', () => {
+  const staple = { title: 'Pilaf', ingredients: ['1 cup basmati rice'], cuisine: 'Iranian', category: 'Main Dish' };
+  const pudding = { ...staple, title: 'Rice pudding', ingredients: ['milk'], category: 'Dessert' };
+  const all = [staple, pudding, { ...staple, cuisine: 'Italian' }];
+  assert.deepEqual(filterRecipes(all, 'Iranian', 'Main Dish', ' RICE '), [staple]);
+  assert.deepEqual(filterRecipes(all, '', 'Dessert', 'rice'), [pudding]);
+  assert.deepEqual(filterRecipes(all, '', '', 'apple'), []);
+});
+import { sortRecipes } from '../lib/recipes.mjs';
+test('highest rated uses averages, with stable newest-first ties and unrated last', () => {
+  const unrated = { ratings: [] }, recent = { ratings: [3,5] }, best = { ratings: [5] }, older = { ratings: [4] };
+  const newest = [unrated, recent, best, older];
+  assert.deepEqual(sortRecipes(newest, 'highest'), [best, recent, older, unrated]);
+  assert.deepEqual(sortRecipes(newest, 'newest'), [unrated, recent, best, older]);
+});
