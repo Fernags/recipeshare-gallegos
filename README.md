@@ -13,6 +13,10 @@ Import this repository on Vercel Hobby, set DATABASE_URL in the project environm
 | Feature | Status |
 |---|---|
 | M1 browsing, M2 details | Done. Recipe cards and the detail view checked in production. |
-| M3 submissions, M4 filters, M5 ratings, M6 persistence, M7 seed recipes | Partly done. The production homepage shows both samples and the empty filter result works. Database-backed checks are pending. |
+| M3 submissions | Done. Required fields are checked and a submitted recipe appears on the live home page. |
+| M4 filters | Done. Combined cuisine and category choices filter the cards. Clearing restores the list. |
+| M5 ratings | Done. A submitted rating updates the average and count on the detail page and home card. |
+| M6 persistence | Recipes and ratings are saved in Neon PostgreSQL. |
+| M7 seed recipes | Done. Italian pizza and American pancakes have different cuisines and categories. |
 | S1 Google sign-in, S2 author editing, S3 signed-in ratings, S4 image upload, S5 keyword search, S6 sorting | Not done |
 | Could: phone-friendly layout | Partly done. Responsive CSS added, awaiting device checks. |
