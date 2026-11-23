@@ -9,6 +9,7 @@ export default function NewRecipe() {
     <label>Author name<input name="author" required /></label><label>Title<input name="title" required /></label>
     {Object.entries({ cuisine: cuisines, category: categories }).map(([name, options]) => <label key={name}>{name}<select name={name} defaultValue="" required><option value="">Choose {name}</option>{options.map(x => <option key={x}>{x}</option>)}</select></label>)}
     <label>Ingredients (one per line)<textarea name="ingredients" required /></label><label>Steps (one per line)<textarea name="steps" required /></label>
+    <label>Servings<input type="number" name="servings" min="1" max="100" defaultValue="4" required /></label>
     <label>Prep time in minutes<input type="number" min="1" name="minutes" required /></label>
     <label>Upload a food photo (JPEG, PNG or WebP, up to 3 MB)<input type="file" name="photo" accept="image/jpeg,image/png,image/webp" onChange={event => {
       const file = event.target.files[0];

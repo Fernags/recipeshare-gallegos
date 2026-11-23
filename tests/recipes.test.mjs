@@ -44,3 +44,10 @@ test('highest rated uses averages, with stable newest-first ties and unrated las
   assert.deepEqual(sortRecipes(newest, 'highest'), [best, recent, older, unrated]);
   assert.deepEqual(sortRecipes(newest, 'newest'), [unrated, recent, best, older]);
 });
+import { scaleIngredient } from '../lib/servings.mjs';
+test('halving servings scales whole, mixed, fractional and ranged quantities', () => {
+  for (const [line, expected] of [['2 eggs','1 eggs'], ['1 1/2 cups rice','0.75 cups rice'], ['½ cup milk','0.25 cup milk'], ['2–4 cloves','1–2 cloves'], ['Salt to taste','Salt to taste']]) {
+    assert.equal(scaleIngredient(line, 4, 2), expected);
+    assert.equal(scaleIngredient(line, 4, 4), line);
+  }
+});

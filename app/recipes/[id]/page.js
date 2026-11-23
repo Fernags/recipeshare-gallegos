@@ -1,3 +1,4 @@
+import Ingredients from './Ingredients';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ratingLabel } from '../../../lib/recipes.mjs';
@@ -12,6 +13,6 @@ export default async function RecipePage({ params }) {
     <img className="hero" src={recipe.image} alt={recipe.title} />
     <p>By {recipe.author} · {ratingLabel(recipe.ratings)}</p>
     <form action={rate.bind(null, recipe.id)}><label>Your rating<select name="stars" required defaultValue=""><option value="">Choose stars</option>{[1,2,3,4,5].map(x => <option key={x} value={x}>{x} ★</option>)}</select></label><button>Rate recipe</button></form>
-    <h2>Ingredients</h2><ul>{recipe.ingredients.map(item => <li key={item}>{item}</li>)}</ul>
+    <Ingredients ingredients={recipe.ingredients} base={recipe.servings ?? 4} />
     <h2>Steps</h2><ol>{recipe.steps.map(step => <li key={step}>{step}</li>)}</ol></article>;
 }
