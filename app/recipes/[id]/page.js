@@ -16,7 +16,7 @@ export default async function RecipePage({ params }) {
     <img className="hero" src={recipe.image} alt={recipe.title} />
     <p>By {recipe.author} · {ratingLabel(recipe.ratings)}</p>
     {own && <Link href={'/recipes/' + recipe.id + '/edit'}>Edit or delete recipe</Link>}
-    <form action={rate.bind(null, recipe.id)}><label>Your rating<select name="stars" required defaultValue=""><option value="">Choose stars</option>{[1,2,3,4,5].map(x => <option key={x} value={x}>{x} ★</option>)}</select></label><button>Rate recipe</button></form>
+    {!user ? <a href="/signin">Sign in to rate this recipe</a> : !own && <form action={rate.bind(null, recipe.id)}><label>Your rating<select name="stars" required defaultValue=""><option value="">Choose stars</option>{[1,2,3,4,5].map(x => <option key={x} value={x}>{x} ★</option>)}</select></label><button>Save rating</button></form>}
     <Ingredients ingredients={recipe.ingredients} base={recipe.servings ?? 4} />
     <h2>Steps</h2><ol>{recipe.steps.map(step => <li key={step}>{step}</li>)}</ol></article>;
 }

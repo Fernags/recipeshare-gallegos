@@ -22,7 +22,9 @@ export async function create(previous, form) {
   redirect('/');
 }
 export async function rate(id, form) {
-  await addRating(id, Number(form.get('stars')));
+  const user = await currentUser();
+  if (!user) redirect('/signin');
+  await addRating(id, user.subject, Number(form.get('stars')));
   revalidatePath('/');
   revalidatePath('/recipes/' + id);
 }

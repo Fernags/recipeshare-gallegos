@@ -18,9 +18,14 @@ Import this repository on Vercel Hobby, set DATABASE_URL in the project environm
 | M5 ratings | Done. A submitted rating updates the average and count on the detail page and home card. |
 | M6 persistence | Recipes and ratings are saved in Neon PostgreSQL. |
 | M7 seed recipes | Done. Italian pizza and American pancakes have different cuisines and categories. |
-| S1 Google sign-in, S2 author editing, S3 signed-in ratings | Not done |
+| S1 Google sign-in | Partly done. Sign-in, sign-out, automatic author name and profile implemented. Google configuration and live sign-in check pending. |
+| S2 author editing | Partly done. Edit/delete are restricted to the signed-in author, including database writes. Signed-in live check pending. |
+| S3 signed-in ratings | Partly done. One replaceable vote per Google account and recipe, with self-ratings blocked. Signed-in live check pending. |
 | S4 image upload | Implemented. Upload a JPEG, PNG or WebP (up to 3 MB) or enter an image link. Uploaded photos persist in Neon. |
 | Could: servings scaler | Implemented. Change servings on a detail page to scale ingredient quantities. Recipes created before this feature start at four servings. |
 | S5 keyword search | Implemented. Matches title or ingredient alongside cuisine and category. |
 | S6 sorting | Implemented. Newest first by default, or highest average rating with newer recipes first on ties. |
 | Could: phone-friendly layout | Partly done. Responsive CSS added, awaiting device checks. |
+
+## Google sign-in setup
+Set GOOGLE_CLIENT_ID to a Google Web application client ID. Register the production origin and its /api/auth/google redirect URI. For local testing, also register http://localhost:3000 and http://localhost:3000/api/auth/google. Google verifies the user's identity and the server verifies the signed credential. Existing anonymous recipes retain their original attribution and votes.
