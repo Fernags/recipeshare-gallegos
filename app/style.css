@@ -22,3 +22,6 @@ label { display:grid; gap:4px; font: 15px system-ui,sans-serif }
 input,textarea,select,button { padding:10px 14px; border:1px solid #aab2a6; border-radius:6px; font:inherit }
 textarea { min-height:96px }
 button { background:#294c36; color:white; cursor:pointer }
+header,header nav { display:flex; align-items:center; gap:18px; flex-wrap:wrap }
+header { justify-content:space-between }
+header nav a, header nav button { font:16px system-ui,sans-serif }

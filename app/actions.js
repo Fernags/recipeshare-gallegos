@@ -1,10 +1,13 @@
 'use server';
+import { currentUser, endSession } from '../lib/session';
 import { preparePhoto } from '../lib/photos.mjs';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { parseRecipe } from '../lib/forms.mjs';
 import { saveRecipe, addRating } from '../lib/store.mjs';
 export async function create(previous, form) {
+  const user = await currentUser();
+  if (user) form.set('author', user.name);
   let data;
   const id = crypto.randomUUID();
   let photo;
@@ -14,7 +17,7 @@ export async function create(previous, form) {
     if (file?.size) photo = await preparePhoto(file);
   } catch (error) { return error.message; }
   if (!process.env.DATABASE_URL) return 'The recipe database is not connected yet.';
-  await saveRecipe({ ...data, id, ratings: [] }, photo);
+  await saveRecipe({ ...data, id, owner: user?.subject ?? null, ratings: [] }, photo);
   revalidatePath('/');
   redirect('/');
 }
@@ -22,4 +25,9 @@ export async function rate(id, form) {
   await addRating(id, Number(form.get('stars')));
   revalidatePath('/');
   revalidatePath('/recipes/' + id);
+}
+
+export async function signOut() {
+  await endSession();
+  redirect('/');
 }
