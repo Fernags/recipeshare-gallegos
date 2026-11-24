@@ -18,9 +18,9 @@ Import this repository on Vercel Hobby, set DATABASE_URL in the project environm
 | M5 ratings | Done. A submitted rating updates the average and count on the detail page and home card. |
 | M6 persistence | Recipes and ratings are saved in Neon PostgreSQL. |
 | M7 seed recipes | Done. Italian pizza and American pancakes have different cuisines and categories. |
-| S1 Google sign-in | Partly done. Sign-in, sign-out, automatic author name and profile implemented. Production client registered. Live account check pending. |
-| S2 author editing | Partly done. Edit/delete are restricted to the signed-in author, including database writes. Signed-in live check pending. |
-| S3 signed-in ratings | Partly done. One replaceable vote per Google account and recipe, with self-ratings blocked. Signed-in live check pending. |
+| S1 Google sign-in | Done. Google sign-in, sign-out, automatic author name and personal recipe listing verified in production. |
+| S2 author editing | Done. Owners can edit and delete. Verified owner editing and blocked editing of another recipe in production. Database tests cover deletion. |
+| S3 signed-in ratings | Done. Verified replacement votes keep the same count. Guest voting and self-ratings are blocked. |
 | S4 image upload | Implemented. Upload a JPEG, PNG or WebP (up to 3 MB) or enter an image link. Uploaded photos persist in Neon. |
 | Could: servings scaler | Implemented. Change servings on a detail page to scale ingredient quantities. Recipes created before this feature start at four servings. |
 | S5 keyword search | Implemented. Matches title or ingredient alongside cuisine and category. |
